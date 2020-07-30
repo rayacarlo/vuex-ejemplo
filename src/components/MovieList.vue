@@ -1,36 +1,41 @@
 <template>
-  <div class="hello container">
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <img src="@/assets/video.svg" class="img-thumbnail my-4">
-        <h2>Welcome to Movie List</h2>
-        <p>Check out our list of comedy and horror movies</p>
-        <ComedyMovieList />
-        <HorrorMovieList />
-      </div>
-      <div class="col-2"></div>
-    </div>
-    
+  <div>
+    <ul class="list-group list-group-horizontal-lg my-2">
+      <li class="list-group-item mx-auto" v-for="movie in Movies" :key="movie.id">
+        <div class="card" style="width: 10rem;">
+          <img class="card-img-top" :src="require(`../assets/${movie.id}.jpg`)">
+          <div class="card-body">
+            <p class="card-text">{{ movie.title }} <br> {{ movie.genre }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import ComedyMovieList from '@/components/ComedyMovieList.vue'
-import HorrorMovieList from '@/components/HorrorMovieList.vue'
-
 export default {
   name: 'MovieList',
-  components: {
-    ComedyMovieList,
-    HorrorMovieList
+  props: {
+    title: String,
+    genre: String,
+    id: Number
+  },
+  computed: {
+    Movies() {
+      if (this.genre == 'Comedy') {
+        return this.$store.getters.comedyMovies
+      } else {
+        return this.$store.getters.horrorMovies
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
-.img-thumbnail{
-  max-width: 50%;
+li{
+  list-style-type: none;
   border: 0;
 }
 </style>

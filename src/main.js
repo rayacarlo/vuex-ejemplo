@@ -16,7 +16,15 @@ const store = new Vuex.Store({
       { id: 5, title: 'Truth Seekers', genre: 'Horror' },
       { id: 6, title: 'Zombieland', genre: 'Horror' },
     ]
-  }
+  },
+  getters: {
+    comedyMovies(store) {
+      return store.movies.filter(movie => movie.genre === 'Comedy');
+    },
+    horrorMovies(store) {
+      return store.movies.filter(movie => movie.genre === 'Horror');
+    },
+  },
 })
 
 new Vue({
