@@ -23,11 +23,7 @@ export default {
   },
   computed: {
     Movies() {
-      if (this.genre == 'Comedy') {
-        return this.$store.getters.comedyMovies
-      } else {
-        return this.$store.getters.horrorMovies
-      }
+      return this.$store.getters.getMoviesByGenre(this.genre);
     }
   }
 }

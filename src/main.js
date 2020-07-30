@@ -24,6 +24,11 @@ const store = new Vuex.Store({
     horrorMovies(store) {
       return store.movies.filter(movie => movie.genre === 'Horror');
     },
+    getMoviesByGenre() {
+      return function (genre) {
+        return store.state.movies.filter(movie => movie.genre == genre)
+      }
+    }
   },
 })
 
